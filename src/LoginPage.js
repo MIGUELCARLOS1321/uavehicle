@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import './LoginPage.css';
 import UAlogo from './UAlogo.png';
 import UAvehicle from './UAvehicle.png';
-import PocketBase from 'pocketbase';
 
-const pb = new PocketBase('http://127.0.0.1:8090');
+const auth = getAuth();
 
 function LoginPage() {
   const [email, setEmail] = useState('');
@@ -23,27 +23,23 @@ function LoginPage() {
     }
 
     try {
-      // Fetch user record from the PocketBase collection based on email
-      const result = await pb.collection('custom_users').getFirstListItem(`email="${email}"`);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log('Login successful:', userCredential.user);
 
-      // Check if the password matches the user's password
-      if (result && result.password === password) {
-        console.log('Login successful');
-        navigate('/landing', { replace: true }); // Navigate to the LandingPage if login is successful
-      } else {
-        setErrorMessage('Incorrect email or password.');
-      }
+      // Navigate to the landing page if login is successful
+      navigate('/landing', { replace: true });
     } catch (error) {
       console.error('Error logging in:', error);
+      // Display a relevant error message to the user
       setErrorMessage('Failed to log in. Please check your credentials.');
     }
   };
 
   return (
     <div className="Login-page">
-      <img src={UAvehicle} alt="UA Vehicle" className="logo" />\
-      <img src={UAlogo} alt="UA Logo" className="logo ua-logo3" style={{ marginTop: -50 }} />
+      <img src={UAvehicle} alt="UA Vehicle" className="logo" />
       <div className="white-square">
+        <img src={UAlogo} alt="UA Logo" className="logo ua-logo3" style={{ marginTop: -50 }} />
         <div className="input-field">
           <input
             type="email"

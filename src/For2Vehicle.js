@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PocketBase from 'pocketbase';
+import { db } from './firebase/firebase'; 
+import { setDoc, doc } from 'firebase/firestore';
 import UAvehicle from './UAvehicle.png';
+import { getAuth } from 'firebase/auth';
 import './For2Vehicle.css';
-
-const pb = new PocketBase('http://127.0.0.1:8090');
 
 function For2Vehicle() {
   const navigate = useNavigate();
+  const auth = getAuth();
+  const userUid = auth.currentUser?.uid;
+
   const [consent, setConsent] = useState(null);
   const [formData, setFormData] = useState({
     fullName: '',
+    studentNumber: '',
     address: '',
     contactNumber: '',
     licenseNumber: '',
@@ -22,10 +26,11 @@ function For2Vehicle() {
     plateNumber: '',
     registrationNumber: '',
     receiptNumber: '',
-    driverLicenseImage: null,
-    ltoRegistrationImage: null,
-    ltoReceiptImage: null,
-    carImage: null,
+    driverLicenseImage: '',
+    ltoRegistrationImage: '',
+    ltoReceiptImage: '',
+    carImage: '',
+    role: '', 
   });
 
   const [successMessage, setSuccessMessage] = useState('');
@@ -42,30 +47,50 @@ function For2Vehicle() {
     });
   };
 
-  const handleFileChange = (e) => {
+  const handleFileChange = async (e) => {
     const { name, files } = e.target;
-    setFormData({
-      ...formData,
-      [name]: files[0],
-    });
+    const file = files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: reader.result, // Store the Base64 string
+        }));
+      };
+      reader.readAsDataURL(file); // Convert file to Base64
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const data = new FormData();
-    Object.keys(formData).forEach((key) => {
-      data.append(key, formData[key]);
-    });
-
+  
+    if (!userUid) {
+      setSuccessMessage('You must be logged in to submit this form.');
+      return; // Prevent submission if user is not logged in
+    }
+  
     try {
-      const response = await pb.collection('For2WheelVehicle').create(data);
-      console.log('Data saved:', response);
-      setSuccessMessage('Thank you for signing up! Please proceed to the Physical Plant ang General Services Office for Confirmation and bring the physical copies.');
-
+      // Create a new document in the 'parkingservice' collection
+      const parkingRef = doc(db, 'parkingtwovehicle', userUid);
+      await setDoc(parkingRef, {
+        ...formData,
+      });
+  
+      // Update the 'registeredfor' field in the user collection
+      const userRef = doc(db, 'user', userUid);
+      await setDoc(userRef, {
+        registeredfor: 'parkingtwovehicle',
+      }, { merge: true }); // Use merge option to update fields without overwriting
+  
+      console.log('Data saved successfully');
+      setSuccessMessage('Thank you for signing up! Please proceed to the Physical Plant and General Services Office for Confirmation and bring the physical copies.');
+  
       // Reset form fields after submission
       setFormData({
         fullName: '',
+        studentNumber: '',
         address: '',
         contactNumber: '',
         licenseNumber: '',
@@ -77,14 +102,15 @@ function For2Vehicle() {
         plateNumber: '',
         registrationNumber: '',
         receiptNumber: '',
-        driverLicenseImage: null,
-        ltoRegistrationImage: null,
-        ltoReceiptImage: null,
-        carImage: null,
+        driverLicenseImage: '',
+        ltoRegistrationImage: '',
+        ltoReceiptImage: '',
+        carImage: '',
+        role: '',
       });
     } catch (error) {
       console.error('Error saving data:', error);
-      setSuccessMessage('An error occurred while saving your data.');
+      setSuccessMessage('An error occurred while saving your data. Please try again.');
     }
   };
 
@@ -128,13 +154,34 @@ function For2Vehicle() {
 
       {consent === 'yes' && (
         <div className="student-form-container">
-          <h2>For 2 / 3 Wheels Vehicle Information</h2>
+          <h2>4 Wheels Information</h2>
           <form onSubmit={handleSubmit}>
+            {/* Role Selection */}
+            <div className="form-group">
+              <label>Role *</label>
+              <select name="role" required onChange={handleInputChange}>
+                <option value="">Select...</option>
+                <option value="Student">Student</option>
+                <option value="Faculty">Faculty</option>
+                <option value="Parent">Parent</option>
+              </select>
+            </div>
+
+            {/* Existing Fields */}
             <div className="form-group">
               <label>Full Name of Applicant (Surname, First Name, MI) *</label>
               <input
                 type="text"
                 name="fullName"
+                required
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="form-group">
+              <label>10-Digit UA ID Number *</label>
+              <input
+                type="text"
+                name="studentNumber"
                 required
                 onChange={handleInputChange}
               />
@@ -183,11 +230,12 @@ function For2Vehicle() {
                 onChange={handleInputChange}
               >
                 <option value="">Select...</option>
+                <option value="Toyota">Toyota</option>
+                <option value="Nissan">Nissan</option>
+                <option value="Mitsubishi">Mitsubishi</option>
                 <option value="Honda">Honda</option>
-                <option value="Yamaha">Yamaha</option>
-                <option value="Suzuki">Suzuki</option>
-                <option value="Honda">Honda</option>
-                <option value="Kawasaki">Kawasaki</option>
+                <option value="Isuzu">Isuzu</option>
+                <option value="Ford">Ford</option>
                 <option value="Other">Other</option>
               </select>
             </div>
@@ -199,7 +247,11 @@ function For2Vehicle() {
                 onChange={handleInputChange}
               >
                 <option value="">Select...</option>
-                <option value="Van">Tricycle</option>
+                <option value="Sedan">Sedan</option>
+                <option value="Pick-up">Pick-up</option>
+                <option value="SUV">SUV (Sports Utility Vehicle)</option>
+                <option value="Crossover">Crossover</option>
+                <option value="Van">Van</option>
                 <option value="Motorcycle">Motorcycle</option>
                 <option value="Other">Other</option>
               </select>
@@ -249,7 +301,7 @@ function For2Vehicle() {
               />
             </div>
             <div className="form-group">
-              <label>LTO Official Receipt Number *</label>
+              <label>Receipt Number *</label>
               <input
                 type="text"
                 name="receiptNumber"
@@ -258,7 +310,7 @@ function For2Vehicle() {
               />
             </div>
             <div className="form-group">
-              <label>Driver's License Image *</label>
+              <label>Upload Driver's License Image *</label>
               <input
                 type="file"
                 name="driverLicenseImage"
@@ -268,7 +320,7 @@ function For2Vehicle() {
               />
             </div>
             <div className="form-group">
-              <label>LTO Registration Image *</label>
+              <label>Upload LTO Registration Image *</label>
               <input
                 type="file"
                 name="ltoRegistrationImage"
@@ -278,7 +330,7 @@ function For2Vehicle() {
               />
             </div>
             <div className="form-group">
-              <label>LTO Receipt Image *</label>
+              <label>Upload LTO Receipt Image *</label>
               <input
                 type="file"
                 name="ltoReceiptImage"
@@ -288,7 +340,7 @@ function For2Vehicle() {
               />
             </div>
             <div className="form-group">
-              <label>Vehicle Image *</label>
+              <label>Upload Car Image *</label>
               <input
                 type="file"
                 name="carImage"
@@ -298,15 +350,15 @@ function For2Vehicle() {
               />
             </div>
 
-            <button type="submit">Submit</button>
+            <button type="submit" className="submit-button">
+              Submit
+            </button>
           </form>
-
-          {successMessage && <div className="success-message">{successMessage}</div>}
+          {successMessage && <p className="success-message">{successMessage}</p>}
         </div>
       )}
 
-      {/* Button Container for Back and Logout */}
-      <div className="button-container3">
+  <div className="button-container3">
         <button onClick={handleBack} className='button2'>Back</button>
         <button onClick={handleLogout} className='logout-button'>Logout</button>
       </div>

@@ -33,7 +33,7 @@
 .ua-logo3 {
   display: inline-block; /* Change the display type to inline-block */
   vertical-align: top; /* Ensure the logo is aligned to the top */
-  top: 280px; /* Keep the fixed top margin */
+  top: 0; /* Keep the fixed top margin */
   margin-left: 5px; /* Adjust the margin to account for the logo's width */
   max-width: 100px; /* Keep the fixed maximum width */
   height: auto; /* Keep the aspect ratio */

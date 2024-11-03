@@ -1,63 +1,59 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import './LandingPage.css';
 import Blue from './Blue.png'; 
 import Red from './Red.png'; 
 import Yellow from './Yellow.png';
-import White from './White.png'; // Import the new image
+import White from './White.png'; 
 import UAvehicle from './UAvehicle.png';
 
 function LandingPage() {
   const navigate = useNavigate();
+  const auth = getAuth();
 
-  // Function to handle navigation to ForStudents.js
-  const handleForStudents = () => {
-    navigate('/forstudents'); // The path should match your route configuration
-  };
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        navigate('/');
+      }
+    });
+    return () => unsubscribe();
+  }, [auth, navigate]);
 
-  // Function to handle navigation to ForFaculties.js
-  const handleForFaculties = () => {
-    navigate('/forfaculties'); // The path should match your route configuration
-  };
-
-  // Function to handle navigation to ForStaffs.js
-  const handleForStaffs = () => {
-    navigate('/forstaffs'); // The path should match your route configuration
-  };
-
-  // Function to handle navigation to For23Wheels.js
-  const handleFor23Wheels = () => {
-    navigate('/for2vehicle'); // The path should match your route configuration
-  };
-
-  // Function to handle logout and navigate back to the App.js page
-  const handleLogout = () => {
-    navigate('/'); // Redirects to the App.js page (home page)
+  // Handle Logout
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate('/'); 
+    } catch (error) {
+      console.error("Failed to log out:", error);
+    }
   };
 
   return (
     <div className="backgroundcolor">
       <div className='header-landing'>
-        <button className="logout-button1" onClick={handleLogout}>Logout</button> {/* Moved inside header */}
+        <button className="logout-button1" onClick={handleLogout}>Logout</button>
       </div>
       <div className="landing-container">
         <img src={UAvehicle} alt="UA Vehicle" className="logo-on-top" />
         <div className="image-row">
           <div className="image-button-group">
             <img src={Blue} alt="Student" />
-            <button className="button" onClick={handleForStudents}>For 4 Wheels Vehicle</button> {/* Handle For Students navigation */}
+            <button className="button" onClick={() => navigate('/vehicleregistration')}>For 4 Wheels Vehicle</button>
           </div>
           <div className="image-button-group">
             <img src={Red} alt="Faculty" />
-            <button className="button" onClick={handleForFaculties}>For Pick & Drop</button> {/* Handle For Faculties navigation */}
+            <button className="button" onClick={() => navigate('/forfaculties')}>For Pick & Drop</button>
           </div>
           <div className="image-button-group">
             <img src={Yellow} alt="Staff" />
-            <button className="button" onClick={handleForStaffs}>For Service</button> {/* Handle For Staffs navigation */}
+            <button className="button" onClick={() => navigate('/forstaffs')}>For Service</button>
           </div>
           <div className="image-button-group">
             <img src={White} alt="New Option" />
-            <button className="button" onClick={handleFor23Wheels}>For 2 Wheels / 3 Wheels Vehicle</button> {/* Handle For 2/3 Wheels navigation */}
+            <button className="button" onClick={() => navigate('/for2vehicle')}>For 2 Wheels / 3 Wheels Vehicle</button>
           </div>
         </div>
       </div>

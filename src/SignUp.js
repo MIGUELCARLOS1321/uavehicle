@@ -1,14 +1,17 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import './SignUp.css'; // Import a CSS file for styling
-import UAvehicle from './UAvehicle.png'; // Import the vehicle image
-import UAlogo from './UAlogo.png'; // Import the UA logo image
-import PocketBase from 'pocketbase';
+import { useNavigate } from 'react-router-dom';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { app } from './firebase/firebase';
+import './SignUp.css';
+import UAvehicle from './UAvehicle.png';
+import UAlogo from './UAlogo.png';
 
-const pb = new PocketBase('http://127.0.0.1:8090');
+const auth = getAuth(app);
+const db = getFirestore(app);
 
 function SignUpPage() {
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -17,58 +20,37 @@ function SignUpPage() {
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
 
-    // Email validation to check if it ends with "@ua.edu.ph" or "@gmail.com"
     if (!email.endsWith('@ua.edu.ph') && !email.endsWith('@gmail.com')) {
-      alert('Please use an email from the University of the Assumption or a Gmail address.');
-      return; // Stop further execution if the email is invalid
+      alert('Please use a valid University or Gmail address.');
+      return;
     }
 
-    // Check for password mismatch
     if (password !== confirmPassword) {
       alert('Passwords do not match. Please try again.');
-      return; // Stop further execution if passwords don't match
+      return;
     }
 
     try {
-      // Check if the email is already in use
-      const existingUsers = await pb.collection('custom_users').getList(1, 1, {
-        filter: `(email = "${email}")`
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const uid = userCredential.user.uid;
+
+      await setDoc(doc(db, "user", uid), {
+        email,
+        uid,
+        createdAt: new Date(),
+        registeredfor:''
       });
 
-      if (existingUsers.items.length > 0) {
-        alert('Email already exists. Please try again with a different email.');
-        return; // Stop further execution if a duplicate is found
-      }
-
-      // If no duplicates, proceed with signup
-      const userData = {
-        email,
-        password,
-      };
-
-      await pb.collection('custom_users').create(userData);
       alert('Signup successful!');
-
-      // Navigate to the login page
-      navigate('/login'); // Adjust the path as needed
+      navigate('/login');
     } catch (error) {
       console.error('Error signing up:', error);
-
-      // Check if the error has a message or details
-      if (error.message) {
-        alert(`Signup failed: ${error.message}`);
-      } else {
-        alert('Signup failed. Please try again.');
-      }
-
-      // Log full error details if available
-      console.error('Full error details:', error);
+      alert(`Signup failed: ${error.message}`);
     }
   };
 
-  // Handle the Go Back button click
   const handleGoBack = () => {
-    navigate(-1); // Navigate back to the previous page
+    navigate(-1);
   };
 
   return (
