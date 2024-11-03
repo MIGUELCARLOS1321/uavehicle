@@ -1,0 +1,147 @@
+.Login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full height of the viewport */
+  background-color: #0C064C; /* Dark blue background */
+  position: relative; /* Add this to make the image absolute */
+  overflow: hidden; /* Add this to prevent scrolling */
+  text-align: center;
+  background-color: #0C064C; /* Fallback background color */
+  background-image: url('./background.jpg'); /* Add your background image */
+  background-size: cover; /* Cover the entire background */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent repeating the background image */
+  position: relative;
+}
+.header-landing2 {
+  background-color: white;
+  height: 69px;
+  width: 100%;
+  margin-bottom: 900px;
+}
+.logo {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 50%; /* adjust the maximum width to your liking */
+  height: 10vmin; /* Keep the vehicle logo small */
+  margin-bottom: 20px; /* Space between the two logos */
+}
+
+.ua-logo3 {
+  position: absolute;
+  top: 295px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px; /* Set a fixed width for the logo */
+  height: 90px; /* Set a fixed height for the logo */
+  object-fit: contain; /* Add this to prevent the logo from stretching */
+  z-index: 10; /* Ensure the logo appears above the white square */
+}
+
+h1 {
+  font-size: 24px;
+  color: white;
+  text-align: center;
+  margin-top: 100px; /* Add some margin to make room for the image */
+}
+
+.white-square {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px; /* increased width */
+  height: 400px; /* increased height */
+  background-color: white;
+  border-radius: 100px; /* Increased border radius */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 90%; /* Add this to prevent the white square from exceeding the screen width */
+  max-height: 90%; /* Add this to prevent the white square from exceeding the screen height */
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.input-field label {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.input-field input {
+  width: 80%; /* Change this to a percentage-based width */
+  height: 30px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px 10px 15px 25px; /* Complex border radius */
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  font-size: 24px;
+}
+
+/* Button container */
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+/* Style for both buttons */
+.go-back-button{
+  background-color: #4249C6;
+  color: white;
+  border: none;
+  padding: 15px 30px; /* Smaller padding */
+  font-size: 16px; /* Decreased font size */
+  font-weight: bold;
+  border-radius: 15px; /* Reduced border radius */
+  cursor: pointer;
+  min-width: 100px; /* Reduced minimum width */
+  transition: background-color 0.3s;
+}
+.log-in-button {
+  background-color: #4249C6;
+  color: white;
+  border: none;
+  padding: 15px 40px; /* Smaller padding */
+  font-size: 16px; /* Decreased font size */
+  font-weight: bold;
+  border-radius: 15px; /* Reduced border radius */
+  cursor: pointer;
+  min-width: 100px; /* Reduced minimum width */
+  transition: background-color 0.3s;
+}
+
+/* Specific style for Go Back button */
+.go-back-button {
+  background-color: #ccc;
+  color: black;
+}
+
+.go-back-button:hover {
+  background-color: #999;
+}
+
+/* Specific style for Log In button */
+.log-in-button:hover {
+  background-color: #252ED3;
+}
+
+/* Error message styling */
+.error-message {
+  color: red;
+  margin-top: 10px;
+  font-size: 14px;
+}

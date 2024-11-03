@@ -1,0 +1,121 @@
+.signup-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full height of the viewport */
+  background-color: #0C064C; /* Dark blue background */
+  position: relative; /* Add this to make the image absolute */
+  text-align: center;
+  background-color: #0C064C; /* Fallback background color */
+  background-image: url('./background.jpg'); /* Add your background image */
+  background-size: cover; /* Cover the entire background */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent repeating the background image */
+  position: relative;
+}
+.ua-logo2 {
+  display: inline-block; /* Change the display type to inline-block */
+  vertical-align: top; /* Ensure the logo is aligned to the top */
+  margin-top: -400px; /* Keep the fixed top margin */
+  margin-left: 5px; /* Adjust the margin to account for the logo's width */
+  max-width: 100px; /* Keep the fixed maximum width */
+  height: auto; /* Keep the aspect ratio */
+  z-index: 1; /* Ensure the logo is on top of the white square */
+}
+.signup-image {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 50%; /* adjust the maximum width to your liking */
+  height: 10vmin; /* Keep the vehicle logo small */
+  margin-bottom: 20px; /* Space between the two logos */
+}
+
+h1 {
+  font-size: 24px;
+  color: white;
+  text-align: center;
+  margin-top: 100px; /* Add some margin to make room for the image */
+}
+
+.white-square {
+  position: absolute;
+  margin-bottom: 10px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 100px; /* Increased border radius */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.input-field label {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.input-field input {
+  width: 300px; /* Revert width to 300px */
+  height: 30px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px 10px 15px 25px; /* Complex border radius */
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  font-size: 24px;
+}
+.button-container1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 10%; /* Ensure it takes up the full width of the white box */
+}
+
+.signup-btn, .back-btn {
+  background-color: #4249C6; /* Button background color for both */
+  color: white;
+  border: none;
+  padding: 10px 20px; /* Reduce padding for smaller buttons */
+  font-size: 16px; /* Reduce font size */
+  font-weight: bold;
+  border-radius: 15px; /* Smaller border radius */
+  cursor: pointer;
+  min-width: 120px; /* Reduce minimum width */
+  transition: background-color 0.3s;
+}
+
+.back-btn {
+  background-color: #ccc; /* Gray background for back button */
+  color: black;
+}
+
+.signup-btn:hover {
+  background-color: #252ED3; /* Change to a slightly darker color on hover */
+}
+
+.back-btn:hover {
+  background-color: #999; /* Darken the back button on hover */
+}
+
+
+.ua-logo {
+  position: absolute;
+  top: 50px; /* Adjust the top margin to your liking */
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 200px; /* Adjust the maximum width to your liking */
+  height: auto; /* Keep the aspect ratio */
+}
+

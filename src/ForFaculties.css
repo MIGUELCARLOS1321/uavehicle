@@ -1,0 +1,122 @@
+/* General container styling */
+.for-faculty-container {
+    background-color: #0C064C; /* Background color */
+    color: white; /* Text color */
+    min-height: 100vh; /* Full height of the viewport */
+    display: flex; /* Flexbox for alignment */
+    flex-direction: column; /* Column layout */
+    align-items: center; /* Center horizontally */
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+.logo-header {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 50%;
+    height: 10vmin;
+    margin-bottom: 20px;
+}
+
+/* Data privacy section */
+.data-privacy-container, 
+.faculty-form-container {
+    background-color: #1E1B57; /* Darker background for form area */
+    border-radius: 10px;
+    padding: 30px;
+    width: 100%;
+    max-width: 700px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    margin-top: 100px;
+}
+
+/* Consent options */
+.consent-options {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.consent-options label {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+}
+
+.consent-options input[type="radio"] {
+    margin-right: 10px;
+}
+
+/* Next button */
+.next-button, .submit-button {
+    background-color: #28A745;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100px;
+}
+
+.next-button:disabled, .submit-button:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+}
+
+/* Form styling */
+.faculty-form-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.form-group input[type="text"], 
+.form-group input[type="date"], 
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Submit button styling */
+.submit-button {
+    background-color: #007BFF;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.logout-button {
+    background-color: #dc3545; /* Bootstrap red */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px; /* Add margin for spacing */
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #c82333; /* Darker red on hover */
+}

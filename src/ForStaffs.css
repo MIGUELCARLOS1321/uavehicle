@@ -1,0 +1,186 @@
+/* General container styling */
+.for-Staffs-container {
+    background-image: url('./background.jpg'); /* Set the background image */
+    background-size: cover; /* Cover the entire area without distortion */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent repeating the background image */
+    background-attachment: fixed; /* Fix the background so it doesn't move on scroll */
+    background-color: #0C064C; /* Background color */
+    color: white; /* Text color */
+    min-height: 100vh; /* Full height of the viewport */
+    display: flex; /* Flexbox for alignment */
+    flex-direction: column; /* Column layout */
+    align-items: center; /* Center horizontally */
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+.logo-header {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 50%;
+    height: 10vmin;
+    margin-bottom: 20px;
+}
+
+/* Data privacy section */
+.data-privacy-container, 
+.Staffs-form-container {
+    background-color: #1E1B57; /* Darker background for form area */
+    border-radius: 10px;
+    padding: 30px;
+    width: 100%;
+    max-width: 700px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    margin-top: 100px;
+}
+
+/* Consent options */
+.consent-options {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.consent-options label {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+}
+
+.consent-options input[type="radio"] {
+    margin-right: 10px;
+}
+
+/* Next button */
+.next-button, .submit-button {
+    background-color: #28A745;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100px;
+}
+
+.next-button:disabled, .submit-button:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+}
+
+/* Form styling */
+.Staffs-form-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.form-group input[type="text"], 
+.form-group input[type="date"], 
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+.success-message {
+    margin-top: 20px;
+    color: green; /* Change this to your preferred color */
+    font-weight: bold; /* Make it bold */
+}
+
+/* Submit button styling */
+.submit-button {
+    background-color: #007BFF;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup {
+    background-color: #28a745; /* Green background */
+    color: black; /* Black text */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: scale(0.8);
+    opacity: 0;
+}
+
+.popup.show {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.popup h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.popup p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.popup button {
+    background-color: white; /* Button background color */
+    color: #28a745; /* Button text color */
+    border: 2px solid #28a745; /* Button border color */
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.popup button:hover {
+    background-color: #fff; /* Lighten button on hover */
+    color: #0056b3; /* Change text color on hover */
+}
+
+.logout-button {
+    background-color: #dc3545; /* Bootstrap red */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px; /* Add margin for spacing */
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #c82333; /* Darker red on hover */
+}

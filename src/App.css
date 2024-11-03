@@ -1,38 +1,63 @@
 .App {
   text-align: center;
+  background-color: #0C064C; /* Fallback background color */
+  background-image: url('./background.jpg'); /* Add your background image */
+  background-size: cover; /* Cover the entire background */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent repeating the background image */
+  position: relative;
+}
+
+.Vehicle-logo {
+  height: 10vmin; /* Keep the vehicle logo small */
+  margin-bottom: 20px; /* Space between the two logos */
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 60vmin; /* Size of the main logo */
   pointer-events: none;
+  z-index: 1; /* Ensure it's on top */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.login-button, .sign-up-button {
+  position: absolute;
+  right: 20%;
+  background-color: #4249C6;
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+  z-index: 2;
+  min-width: 200px;
+  transition: background-color 0.3s;
+}
+
+.login-button {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.sign-up-button {
+  top: calc(50% + 70px); /* Below the login button */
+  transform: translateY(-50%);
+}
+
+.login-button:hover, .sign-up-button:hover {
+  background-color: #252ED3;
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  padding-top: 0;
+  margin-top: 0;
+  position: relative;
 }

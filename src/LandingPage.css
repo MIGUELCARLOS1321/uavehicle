@@ -1,0 +1,125 @@
+/* Prevent scrolling */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  background-image: url('./background.jpg'); /* Set the background image */
+  background-size: cover; /* Cover the entire background */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent repeating the background image */
+}
+
+.backgroundcolor {
+  min-height: 100vh; /* Ensure the background covers at least the full viewport height */
+}
+
+.header-landing {
+  background-color: white;
+  height: 69px;
+  width: 100%;
+  position: relative; /* Enable absolute positioning for logout button */
+}
+
+.logout-button1 {
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
+  background-color: rgb(179, 179, 179) !important;
+  color: rgb(0, 0, 0) !important;
+  padding: 10px 30px;
+  font-size: 18px;
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.logout-button1:hover {
+  background-color: red !important;
+  color: white !important;
+}
+
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  height: calc(100vh - 69px); /* Subtract header height from total viewport height */
+}
+
+.logo-on-top {
+  height: 10vmin;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 50%;
+  margin-bottom: 20px;
+}
+
+.image-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* Allow wrapping for a 2x2 grid */
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.image-button-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  width: calc(45% - 20px); /* Base width for images */
+}
+
+.image-button-group img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.button {
+  background-color: #4CAF50;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #3e8e41;
+}
+
+/* Increase size slightly for larger screens */
+@media (min-width: 1200px) {
+  .image-button-group {
+    width: calc(38% - 20px); /* Slightly larger images on desktop */
+  }
+
+  .image-button-group img {
+    max-width: 350px; /* Slightly larger max image size on desktop */
+  }
+}
+
+/* Responsive Design for smaller screens */
+@media (max-width: 768px) {
+  .image-row {
+    flex-direction: row;
+  }
+
+  .image-button-group {
+    width: 100%; /* Full width for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .image-button-group img {
+    max-width: 150px;
+  }
+}
