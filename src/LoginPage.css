@@ -31,15 +31,15 @@
 }
 
 .ua-logo3 {
-  position: absolute;
-  top: 295px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px; /* Set a fixed width for the logo */
-  height: 90px; /* Set a fixed height for the logo */
-  object-fit: contain; /* Add this to prevent the logo from stretching */
-  z-index: 10; /* Ensure the logo appears above the white square */
+  display: inline-block; /* Change the display type to inline-block */
+  vertical-align: top; /* Ensure the logo is aligned to the top */
+  top: 280px; /* Keep the fixed top margin */
+  margin-left: 5px; /* Adjust the margin to account for the logo's width */
+  max-width: 100px; /* Keep the fixed maximum width */
+  height: auto; /* Keep the aspect ratio */
+  z-index: 1; /* Ensure the logo is on top of the white square */
 }
+
 
 h1 {
   font-size: 24px;
