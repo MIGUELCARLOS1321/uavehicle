@@ -45,15 +45,15 @@ function LandingPage() {
           </div>
           <div className="image-button-group">
             <img src={Red} alt="Faculty" />
-            <button className="button" onClick={() => navigate('/forfaculties')}>For Pick & Drop</button>
+            <button className="button" onClick={() => navigate('/forpickndrop')}>For Pick & Drop</button>
           </div>
           <div className="image-button-group">
             <img src={Yellow} alt="Staff" />
-            <button className="button" onClick={() => navigate('/forstaffs')}>For Service</button>
+            <button className="button" onClick={() => navigate('/forservice')}>For Service</button>
           </div>
           <div className="image-button-group">
             <img src={White} alt="New Option" />
-            <button className="button" onClick={() => navigate('/for2vehicle')}>For 2 Wheels / 3 Wheels Vehicle</button>
+            <button className="button" onClick={() => navigate('/fortwowheelvehicle')}>For 2 Wheels / 3 Wheels Vehicle</button>
           </div>
         </div>
       </div>
