@@ -156,16 +156,6 @@ function ForFaculties() {
         <div className="student-form-container">
           <h2>Pickup and Drop Information</h2>
           <form onSubmit={handleSubmit}>
-            {/* Role Selection */}
-            <div className="form-group">
-              <label>Role *</label>
-              <select name="role" required onChange={handleInputChange}>
-                <option value="">Select...</option>
-                <option value="Student">Student</option>
-                <option value="Faculty">Faculty</option>
-                <option value="Parent">Parent</option>
-              </select>
-            </div>
 
             {/* Existing Fields */}
             <div className="form-group">
@@ -173,15 +163,6 @@ function ForFaculties() {
               <input
                 type="text"
                 name="fullName"
-                required
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="form-group">
-              <label>10-Digit UA ID Number *</label>
-              <input
-                type="text"
-                name="studentNumber"
                 required
                 onChange={handleInputChange}
               />
