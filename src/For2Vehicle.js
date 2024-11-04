@@ -154,7 +154,7 @@ function For2Vehicle() {
 
       {consent === 'yes' && (
         <div className="student-form-container">
-          <h2>4 Wheels Information</h2>
+          <h2>2 Wheels Information</h2>
           <form onSubmit={handleSubmit}>
             {/* Role Selection */}
             <div className="form-group">

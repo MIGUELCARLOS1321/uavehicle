@@ -154,7 +154,7 @@ function ForStaffs() {
 
       {consent === 'yes' && (
         <div className="student-form-container">
-          <h2>4 Wheels Information</h2>
+          <h2>Service Information</h2>
           <form onSubmit={handleSubmit}>
             {/* Role Selection */}
             <div className="form-group">

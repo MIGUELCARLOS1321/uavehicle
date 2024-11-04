@@ -36,9 +36,9 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/landing" element={<LandingPage />} />
           <Route path="/vehicleregistration" element={<ForStudents />} />
-          <Route path="/forfaculties" element={<ForFaculties />} />
-          <Route path="/forstaffs" element={<ForStaffs />} />
-          <Route path="/for2vehicle" element={<For2Vehicle />} />
+          <Route path="/forpickndrop" element={<ForFaculties />} />
+          <Route path="/forservice" element={<ForStaffs />} />
+          <Route path="/fortwowheelvehicle" element={<For2Vehicle />} />
         </Routes>
       </div>
     </Router>
