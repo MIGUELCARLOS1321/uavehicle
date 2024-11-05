@@ -336,7 +336,7 @@ function ForStudents() {
               />
             </div>
             <div className="form-group">
-              <label>Upload Car Image *</label>
+              <label>Upload Vehicle Image *</label>
               <input
                 type="file"
                 name="carImage"
