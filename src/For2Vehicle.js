@@ -163,7 +163,7 @@ function For2Vehicle() {
                 <option value="">Select...</option>
                 <option value="Student">Student</option>
                 <option value="Faculty">Faculty</option>
-                <option value="Parent">Parent</option>
+                <option value="Others">Others</option>
               </select>
             </div>
 
@@ -230,12 +230,11 @@ function For2Vehicle() {
                 onChange={handleInputChange}
               >
                 <option value="">Select...</option>
-                <option value="Toyota">Toyota</option>
-                <option value="Nissan">Nissan</option>
-                <option value="Mitsubishi">Mitsubishi</option>
                 <option value="Honda">Honda</option>
-                <option value="Isuzu">Isuzu</option>
-                <option value="Ford">Ford</option>
+                <option value="Kawasaki">Kawasaki</option>
+                <option value="BMW">BMW</option>
+                <option value="Yamaha">Yamaha</option>
+                <option value="Suzuki">Suzuki</option>
                 <option value="Other">Other</option>
               </select>
             </div>
@@ -247,12 +246,8 @@ function For2Vehicle() {
                 onChange={handleInputChange}
               >
                 <option value="">Select...</option>
-                <option value="Sedan">Sedan</option>
-                <option value="Pick-up">Pick-up</option>
-                <option value="SUV">SUV (Sports Utility Vehicle)</option>
-                <option value="Crossover">Crossover</option>
-                <option value="Van">Van</option>
                 <option value="Motorcycle">Motorcycle</option>
+                <option value="Tricycle">Tricycle</option>
                 <option value="Other">Other</option>
               </select>
             </div>

@@ -159,7 +159,7 @@ function ForStudents() {
                 <option value="">Select...</option>
                 <option value="Student">Student</option>
                 <option value="Faculty">Faculty</option>
-                <option value="Parent">Parent</option>
+                <option value="Others">Others</option>
               </select>
             </div>
 
