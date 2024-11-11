@@ -162,16 +162,16 @@
 
 .midSection2{
   height: 78%;
-  overflow: auto;
-  padding-left: 10rem;
-  padding-right: 10rem;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between; 
-  align-items: center; 
-  gap: 19rem; 
-
-  background-color: rgba(0, 0, 0, 0.1);
+  overflow: auto;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8em;
+  padding-top: 5em;
+  padding-bottom: 5em;
+  padding-right: 10em;
+  padding-left: 10em;
 }
 
 .footerSection2{

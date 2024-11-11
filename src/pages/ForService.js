@@ -35,6 +35,7 @@ function ForService() {
         ltoRegistrationImage: '',
         ltoReceiptImage: '',
         carImage: '',
+        remarks: '',
     });
 
     useEffect(() => {
@@ -86,8 +87,8 @@ function ForService() {
             const fullName = `${surname || ''}, ${firstName || ''} ${middleInitial ? middleInitial + ' ' : ''}${suffix || ''}`.trim();
     
             // Concatenate Address
-            const { addressline, city, province } = updatedData;
-            const address = `${addressline ? addressline + ', ' : ''}${city ? city + ', ' : ''}${province || ''}`.trim();
+            const { addressline, municipality, province } = updatedData;
+            const address = `${addressline ? addressline + ', ' : ''}${municipality ? municipality + ', ' : ''}${province || ''}`.trim();
     
             // Update fullName and address fields in formData
             return {
@@ -151,7 +152,10 @@ function ForService() {
                 ltoRegistrationImage: '',
                 ltoReceiptImage: '',
                 carImage: '',
+                remarks:'',
             });
+
+            navigate("/landing"); 
         } catch (error) {
             console.error('Error saving data:', error);
             setSuccessMessage('An error occurred while saving your data.');
@@ -248,7 +252,6 @@ function ForService() {
                         <div className='student-form'>
                             <form onSubmit={handleSubmit}>
 
-                            {/* Existing Fields */}
                             <div className='name-form-group'>
                                 <div className="form-group">
                                     <label>Surname</label>
@@ -275,18 +278,24 @@ function ForService() {
                                     <input
                                         type="text"
                                         name="middleInitial"
-                                        maxLength="1" 
                                         onChange={handleInputChange}
                                     />
                                 </div>
 
                                 <div className="form-group">
                                     <label>Suffix</label>
-                                    <input
-                                        type="text"
+                                    <select>
                                         name="suffix"
+                                        placeholder=""
                                         onChange={handleInputChange}
-                                    />
+                                        <option value="">N/A</option>
+                                        <option value="Jr.">Jr.</option>
+                                        <option value="Sr.">Sr.</option>
+                                        <option value="I">I</option>
+                                        <option value="II">II</option>
+                                        <option value="III">III</option>
+                                        <option value="IV">IV</option>
+                                    </select>
                                 </div>
                             </div>
                             <div className="form-group">
@@ -299,31 +308,50 @@ function ForService() {
                                 />
                             </div>
                             <div className='address-form-group'>
-                                <div className="form-group">
+                            <div className="form-group">
                                     <label>Province</label>
-                                    <input
-                                        type="text"
+                                    <select 
                                         name="province"
                                         required
                                         onChange={handleInputChange}
-                                    />
+                                    >
+                                        <option value="Pampanga">Pampanga</option>
+                                    </select>
                                 </div>
                                 <div className="form-group">
-                                    <label>City</label>
-                                    <input
-                                        type="text"
-                                        name="city"
-                                        required
-                                        onChange={handleInputChange}
-                                    />
+                                    <label>Municipality</label>
+                                    <select name="municipality" required onChange={handleInputChange}>
+                                        <option value=""></option>
+                                        <option value="Apalit">Apalit</option>
+                                        <option value="Bacolor">Bacolor</option>
+                                        <option value="Candaba">Candaba</option>
+                                        <option value="Floridablanca">Floridablanca</option>
+                                        <option value="Guagua">Guagua</option>
+                                        <option value="Lubao">Lubao</option>
+                                        <option value="Macabebe">Macabebe</option>
+                                        <option value="Magalang">Magalang</option>
+                                        <option value="Mabalacat">Mabalacat</option>
+                                        <option value="Manalapan">Manalapan</option>
+                                        <option value="Mexico">Mexico</option>
+                                        <option value="Minalin">Minalin</option>
+                                        <option value="Porac">Porac</option>
+                                        <option value="San Fernando">San Fernando</option>
+                                        <option value="San Luis">San Luis</option>
+                                        <option value="San Simon">San Simon</option>
+                                        <option value="Santa Ana">Santa Ana</option>
+                                        <option value="Santa Rita">Santa Rita</option>
+                                        <option value="Santo Tomas">Santo Tomas</option>
+                                        <option value="Sasmuan">Sasmuan</option>
+                                    </select>
                                 </div>
                             </div>
                             <div className="form-group">
-                                <label>Contact Number</label>
+                                <label>Contact Number (63+)</label>
                                 <input
                                     type="text"
                                     name="contactNumber"
                                     required
+                                    maxLength="10"
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -491,6 +519,16 @@ function ForService() {
                                 required
                                 onChange={handleFileChange}
                             />
+                            </div>
+
+                            <div className='form-group'>
+                                <label>Remarks if any</label>
+                                <textarea
+                                    type='text'
+                                    name='remarks'
+                                    maxLength="500"
+                                    onChange={handleInputChange}
+                                />
                             </div>
 
                             <button type="submit" className="submit-button" disabled={isSubmitting}>
