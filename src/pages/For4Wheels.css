@@ -1,0 +1,273 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+.pageContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url('../newbackground.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    gap: 1rem;
+  
+    position: relative;
+}
+  
+.leftContent {
+    width: 25em; 
+    height: 95vh;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    padding: 3rem;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.topContainer span{
+    color: #004aad;
+    font-size: 3rem;
+    font-weight: bold;
+}
+  
+.logoutButton{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+  
+.logoHolder img{
+    width: 10em;
+    height: 10em;
+}
+  
+.headerTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid black;
+    height: 20vh;
+}
+  
+.headerTitle span{
+    font-size: 2rem;
+    font-weight: bold;
+    color: #004aad;
+    padding-top: 2rem;
+    padding-bottom: 2rem;   
+}
+  
+.rightPageContent{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.footerContent{
+    height: 10vh;
+}
+  
+.rightContent {
+    width: 55em; 
+    height: 95vh;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+}
+  
+.topSection{
+    height: 15%;
+    border-bottom: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.topSection .headerText{
+    color: #004aad;
+    font-size: 2rem;
+    font-weight: bold;
+}
+  
+.midSection{
+    height: 78%;
+    margin: 0;
+    padding: 2rem;
+    text-align: justify;
+    overflow: auto;
+    display: flex;
+    align-items: flex-start;  
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.radioButton{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    gap: 5rem;
+}
+
+.footerSection button{
+    background: none;
+    outline: none;
+    border: none;
+    color: #004aad;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.footerSection button:disabled {
+    color: #cccccc; 
+    cursor: auto;
+    opacity: 0.5; 
+}
+  
+.footerSection{
+    height: 7%;
+    border-top: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    font-size: 2rem;
+    color: #004aad;
+}
+
+
+.student-form {
+    padding: 2rem;
+    background-color: #f7f9fc; 
+    border-radius: 8px;
+    width: 100%;
+    max-width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+  
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+}
+  
+.form-group label {
+    font-weight: bold;
+    color: #004aad; 
+    margin-bottom: 0.5rem;
+}
+
+.form-group-province{
+    padding: 0.75rem;
+    border-radius: 4px;
+    border: 1px solid #cccccc;
+    font-size: 1rem;
+    color: #333;
+    background-color: #fff;
+    transition: border-color 0.3s ease-in-out;
+}
+  
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group select,
+.form-group input[type="file"] {
+    padding: 0.75rem;
+    border-radius: 4px;
+    border: 1px solid #cccccc;
+    font-size: 1rem;
+    color: #333;
+    background-color: #fff;
+    transition: border-color 0.3s ease-in-out;
+}
+  
+.form-group input[type="text"]:focus,
+.form-group input[type="date"]:focus,
+.form-group select:focus,
+.form-group input[type="file"]:focus {
+    border-color: #004aad;
+    outline: none;
+}
+  
+.submit-button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #004aad;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1.5rem;
+}
+  
+.submit-button:hover {
+    background-color: #003580; 
+}
+  
+.footerSection button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #004aad;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.footerSection button.leftButton:hover,  
+.footerSection button.rightButton:hover {
+    background-color: #003580;
+}
+  
+.name-form-group{
+    display: flex;
+    width: 100%;
+    height: 7em;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.name-form-group .form-group [name="surname"],
+.name-form-group .form-group [name="firstName"]
+{
+    width: 100%;
+}
+
+.name-form-group .form-group [name="suffix"],
+.name-form-group .form-group [name="middleInitial"]{
+    width: 100%;
+}
+
+.name-form-group .form-group [name="surname"],
+.name-form-group .form-group [name="firstName"],
+.name-form-group .form-group [name="suffix"],
+.name-form-group .form-group [name="middleInitial"]{
+    position: sticky;
+}
+  
+.address-form-group{
+    display: flex;
+    width: 100%;
+    height: 5em;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.address-form-group .form-group input{
+    width: 21em;
+}
+  
+  

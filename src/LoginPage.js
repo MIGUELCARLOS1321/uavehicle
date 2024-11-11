@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import './LoginPage.css';
-import UAlogo from './UAlogo.png';
-import UAvehicle from './UAvehicle.png';
+import { Link } from 'react-router-dom';
 
 const auth = getAuth();
 
@@ -36,36 +35,59 @@ function LoginPage() {
   };
 
   return (
-    <div className="Login-page">
-      <img src={UAvehicle} alt="UA Vehicle" className="logo" />
-      <div className="white-square">
-        <img src={UAlogo} alt="UA Logo" className="logo ua-logo3" style={{ marginTop: -50 }} />
-        <div className="input-field">
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="input-field">
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+    <>
+      <div className="logInPage">
+        <div className='pageContainer'>
+          <div className='pageIntro'>
+            <img src="UAlogo.png" alt="UA Logo" />
+            <span>UAVEHICLE</span>
+          </div>
+          <div className='logInForm'>
+            <div className='logInHeader'>
+              <span style={{fontSize: "2rem"}}>Login</span>
+              <span style={{fontSize: "1rem"}}>
+                Dont have an account?&nbsp;  
+                <Link to="/" style={{ color: "#004aad"}}>
+                  Register
+                </Link>
+              </span>
+            </div>
+            <div className='formInput'>
+                <div className="input-field">
+                  <label>Please enter Email</label>
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div className="input-field">
+                  <label>Please enter password</label>
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
 
-        {/* Button container for Login and Go Back */}
-        <div className="button-container">
-          <button className="go-back-button" onClick={() => navigate(-1)}>Go Back</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <button className="log-in-button" onClick={handleLogin}>Log In</button>
-        </div>
+                <div className="button-container">
+                  <button className="log-in-button" onClick={handleLogin}>Login</button>
+                </div>
 
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
+                <div className="signinGoogle">
+                  <div className="signinGoogleHeader">Signin Using:</div>
+                    <button className='googleImage'>
+                    <img src='/google.png' alt="Google" />
+                  </button>
+                </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

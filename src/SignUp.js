@@ -4,8 +4,7 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { app } from './firebase/firebase';
 import './SignUp.css';
-import UAvehicle from './UAvehicle.png';
-import UAlogo from './UAlogo.png';
+import { Link } from 'react-router-dom'; // Add this line
 
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -34,7 +33,7 @@ function SignUpPage() {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const uid = userCredential.user.uid;
 
-      await setDoc(doc(db, "user", uid), {
+      await setDoc(doc(db, "users", uid), {
         email,
         uid,
         createdAt: new Date(),
@@ -49,34 +48,53 @@ function SignUpPage() {
     }
   };
 
-  const handleGoBack = () => {
-    navigate(-1);
-  };
-
   return (
-    <div className="signup-container">
-      <img src={UAvehicle} alt="UA Vehicle" className="signup-image" />
-      <img src={UAlogo} alt="UA Logo" className="ua-logo2" />
-      <div className="white-square">
-        <form onSubmit={handleSubmit}>
-          <br />
-          <br />
-          <div className="input-field">
-            <input type="email" id="email" name="email" placeholder="Enter your email" required />
+    <>
+      <div className="signUpPage">
+        <div className='pageContainer'>
+          <div className='pageIntro'>
+            <img src="UAlogo.png" alt="UA Logo" />
+            <span>UAVEHICLE</span>
           </div>
-          <div className="input-field">
-            <input type="password" id="password" name="password" placeholder="Enter your password" required />
+          <div className='signUpForm'>
+            <div className='signUpHeader'>
+              <span style={{fontSize: "2rem"}}>Create new Account</span>
+              <span style={{fontSize: "1rem"}}>
+                Already Registered?&nbsp;  
+                <Link to="/login" style={{ color: "#004aad"}}>
+                  Login
+                </Link>
+              </span>
+            </div>
+            <div className='formInput'>
+              <form onSubmit={handleSubmit}>
+                <div className="input-field">
+                  <label>Please enter Email</label>
+                  <input type="email" id="email" name="email" placeholder="Enter your email" required />
+                </div>
+                <div className="input-field">
+                  <label>Please enter password</label>
+                  <input type="password" id="password" name="password" placeholder="Enter your password" required />
+                </div>
+                <div className="input-field">
+                  <label>Re-enter password</label>
+                  <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required />
+                </div>
+                <div className="button-container1">
+                  <button className="signup-btn" type="submit">Sign Up</button>
+                </div>
+              </form>
+              <div className="signupGoogle">
+                <div className="signupGoogleHeader">SignUp Using:</div>
+                <button className='googleImage'>
+                  <img src='/google.png' alt="Google" />
+                </button>
+              </div>
+            </div>
           </div>
-          <div className="input-field">
-            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required />
-          </div>
-          <div className="button-container1">
-            <button className="back-btn" type="button" onClick={handleGoBack}>Go Back</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button className="signup-btn" type="submit">Sign Up</button>
-          </div>
-        </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

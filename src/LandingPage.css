@@ -1,125 +1,190 @@
-/* Prevent scrolling */
-html, body {
-  height: 100%;
+* {
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
-  background-image: url('./background.jpg'); /* Set the background image */
-  background-size: cover; /* Cover the entire background */
-  background-position: center; /* Center the background image */
-  background-repeat: no-repeat; /* Prevent repeating the background image */
+  box-sizing: border-box;
 }
 
-.backgroundcolor {
-  min-height: 100vh; /* Ensure the background covers at least the full viewport height */
-}
-
-.header-landing {
-  background-color: white;
-  height: 69px;
-  width: 100%;
-  position: relative; /* Enable absolute positioning for logout button */
-}
-
-.logout-button1 {
-  position: absolute;
-  bottom: 15px;
-  right: 20px;
-  background-color: rgb(179, 179, 179) !important;
-  color: rgb(0, 0, 0) !important;
-  padding: 10px 30px;
-  font-size: 18px;
-  border: 2px solid rgb(255, 255, 255);
-  border-radius: 50px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.logout-button1:hover {
-  background-color: red !important;
-  color: white !important;
-}
-
-.landing-container {
+.pageContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  flex-grow: 1;
-  height: calc(100vh - 69px); /* Subtract header height from total viewport height */
+  height: 100vh;
+  background-image: url('./newbackground.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  gap: 1rem;
+
 }
 
-.logo-on-top {
-  height: 10vmin;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  max-width: 50%;
-  margin-bottom: 20px;
-}
+.leftContent {
+  width: 25em; 
+  height: 95vh;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  padding: 3rem;
 
-.image-row {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap; /* Allow wrapping for a 2x2 grid */
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.image-button-group {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin: 10px;
-  width: calc(45% - 20px); /* Base width for images */
+  justify-content: space-between;
 }
 
-.image-button-group img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  margin-bottom: 10px;
+.topContainer span{
+  color: #004aad;
+  font-size: 3rem;
+  font-weight: bold;
 }
 
-.button {
-  background-color: #4CAF50;
-  color: #ffffff;
-  padding: 10px 20px;
+.logoutButton1 {
+  margin-top: 1rem;
+  width: 15em;
+  height: 2rem;
+  background-color: #004aad;
+  border-radius: 1rem;
+  color: white;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease; 
 }
 
-.button:hover {
-  background-color: #3e8e41;
+.logoutButton1:hover {
+  background-color: #003080; 
+  transform: scale(1.05); 
 }
 
-/* Increase size slightly for larger screens */
-@media (min-width: 1200px) {
-  .image-button-group {
-    width: calc(38% - 20px); /* Slightly larger images on desktop */
-  }
-
-  .image-button-group img {
-    max-width: 350px; /* Slightly larger max image size on desktop */
-  }
+.logoHolder img{
+  width: 10em;
+  height: 10em;
 }
 
-/* Responsive Design for smaller screens */
-@media (max-width: 768px) {
-  .image-row {
-    flex-direction: row;
-  }
-
-  .image-button-group {
-    width: 100%; /* Full width for smaller screens */
-  }
+.headerTitle{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid black;
+  height: 20vh;
 }
 
-@media (max-width: 480px) {
-  .image-button-group img {
-    max-width: 150px;
-  }
+.headerTitle span{
+  font-size: 2rem;
+  font-weight: bold;
+  color: #004aad;
+  padding-top: 2rem;
+  padding-bottom: 2rem;   
 }
+
+.rightPageContent{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.for4wheels, .for2wheels, .forservice, .forpicndrop{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background: none;
+}
+
+.for4wheels img{
+  width: 10em;
+  height: 10em;
+  border-radius: 50%;
+  outline: 40px solid blue;
+  margin-bottom: 5rem;
+  position: relative;
+}
+
+.forpicndrop img{
+  width: 10em;
+  height: 10em;
+  border-radius: 50%;
+  outline: 40px solid red;
+  margin-bottom: 5rem;
+  position: relative;
+}
+.forservice img{
+  width: 10em;
+  height: 10em;
+  border-radius: 50%;
+  outline: 40px solid yellow;
+  margin-bottom: 5rem;
+  position: relative;
+}
+.for2wheels img{
+  width: 10em;
+  height: 10em;
+  border-radius: 50%;
+  outline: 40px solid white;
+  margin-bottom: 5rem;
+  position: relative;
+}
+
+.buttonText1, .buttonText2, .buttonText3, .buttonText4{
+  position: sticky;
+  border-radius: 5px;
+  padding: 10px;
+  width: 15em;
+  font-weight: bold;
+  color: white;
+}
+
+.footerContent{
+  height: 10vh;
+}
+
+.rightContent {
+  width: 55em; 
+  height: 95vh;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+}
+
+.topSection{
+  height: 15%;
+  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.topSection .headerText{
+  color: #004aad;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.midSection2{
+  height: 78%;
+  overflow: auto;
+  padding-left: 10rem;
+  padding-right: 10rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; 
+  align-items: center; 
+  gap: 19rem; 
+
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.footerSection2{
+  height: 7%;
+  border-top: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footerSection2 .footerText2{
+  color: rgba(0, 0, 0, 0.7);;
+}
+
+
+

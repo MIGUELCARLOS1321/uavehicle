@@ -1,44 +1,29 @@
 import React from 'react';
-import logo from './UAarchives.png'; // Your main logo
-import vehicleLogo from './UAvehicle.png'; // New image
 import './App.css';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import SignUpPage from './SignUp'; // Import your SignUpPage component
-import LoginPage from './LoginPage'; // Import your LoginPage component
-import LandingPage from './LandingPage'; // Import your LandingPage component
-import ForStudents from './ForStudents'; // Import your ForStudents component
-import ForFaculties from './ForFaculties'; // Import your ForFaculties component
-import ForStaffs from './ForStaffs'; // Import your ForStaffs component
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import SignUpPage from './SignUp';
+import LoginPage from './LoginPage';
+import LandingPage from './LandingPage';
+import ForPickNDrop from './pages/ForPickNDrop';
+import ForStaffs from './ForStaffs';
 import For2Vehicle from './For2Vehicle';
+import ProtectedRoute from './ProtectedRoute'; 
+import For4Wheels from './pages/For4Wheels';
+import ForService from './pages/ForService';
+import For2Wheels from './pages/For2Wheels';
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={
-            <div>
-              <header className="App-header">
-                <img src={vehicleLogo} className="Vehicle-logo" alt="vehicle logo" />
-                <img src={logo} className="App-logo" alt="app logo" />
-              </header>
-              <div>
-                <Link to="/signup">
-                  <button className="sign-up-button">SIGN UP</button>
-                </Link>
-                <Link to="/login">
-                  <button className="login-button">LOG IN</button>
-                </Link>
-              </div>
-            </div>
-          } />
-          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/" element={<SignUpPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/landing" element={<LandingPage />} />
-          <Route path="/vehicleregistration" element={<ForStudents />} />
-          <Route path="/forpickndrop" element={<ForFaculties />} />
-          <Route path="/forservice" element={<ForStaffs />} />
-          <Route path="/fortwowheelvehicle" element={<For2Vehicle />} />
+          <Route path="/landing" element={<ProtectedRoute element={<LandingPage />} />} />
+          <Route path="/vehicleregistration" element={<ProtectedRoute element={<For4Wheels />} />} />
+          <Route path="/forpickndrop" element={<ProtectedRoute element={<ForPickNDrop />} />} />
+          <Route path="/forservice" element={<ProtectedRoute element={<ForService />} />} />
+          <Route path="/fortwowheelvehicle" element={<ProtectedRoute element={<For2Wheels />} />} />
         </Routes>
       </div>
     </Router>

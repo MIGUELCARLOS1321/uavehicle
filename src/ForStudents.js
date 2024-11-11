@@ -179,6 +179,9 @@ function ForStudents() {
                 type="text"
                 name="studentNumber"
                 required
+                maxLength="10"
+                pattern="\d{10}"
+                title="Please input a valid 10-Digit UA Number"
                 onChange={handleInputChange}
               />
             </div>
@@ -206,6 +209,9 @@ function ForStudents() {
                 type="text"
                 name="licenseNumber"
                 required
+                pattern="[A-Z]{1}\d{2}-\d{2}-\d{6}" // Enforces "AB1-23-456789" format
+                style={{ textTransform: 'uppercase' }}
+                title="Please enter in format: A12-34-567890" // Shows help text if format is incorrect
                 onChange={handleInputChange}
               />
             </div>
@@ -215,6 +221,8 @@ function ForStudents() {
                 type="date"
                 name="expiryDate"
                 required
+                min={new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0]}
+                title="Please select a date at least one year from today."
                 onChange={handleInputChange}
               />
             </div>
@@ -246,9 +254,9 @@ function ForStudents() {
                 <option value="Sedan">Sedan</option>
                 <option value="Pick-up">Pick-up</option>
                 <option value="SUV">SUV (Sports Utility Vehicle)</option>
+                <option value="Hatchback">Hatchback</option>
                 <option value="Crossover">Crossover</option>
                 <option value="Van">Van</option>
-                <option value="Motorcycle">Motorcycle</option>
                 <option value="Other">Other</option>
               </select>
             </div>
@@ -284,24 +292,39 @@ function ForStudents() {
                 type="text"
                 name="plateNumber"
                 required
-                onChange={handleInputChange}
+                maxLength="7" // Allows up to 3 letters and 4 digits only
+                pattern="[A-Za-z]{1,3}[0-9]{1,4}" // Ensures up to 3 letters followed by up to 4 numbers
+                title="Please enter a valid plate number (e.g., ABC1234)"
+                onChange={(e) => {
+                  const value = e.target.value.replace(/\s+/g, '').toUpperCase(); // Remove spaces and capitalize
+                  setFormData({
+                    ...formData,
+                    plateNumber: value,
+                  });
+                }}
               />
             </div>
             <div className="form-group">
-              <label>LTO Certification of Registration Number *</label>
+              <label>LTO Certification of Registration Number</label>
               <input
                 type="text"
                 name="registrationNumber"
                 required
+                maxLength="20" 
+                pattern="\d{10,20}" // Accepts 10 to 20 digits only
+                title="Must be 10-20 digits"
                 onChange={handleInputChange}
               />
             </div>
             <div className="form-group">
-              <label>Receipt Number *</label>
+              <label>Receipt Number</label>
               <input
                 type="text"
                 name="receiptNumber"
                 required
+                maxLength="20"
+                pattern="\d{10,20}" // Accepts 10 to 20 digits only
+                title="Must be 10-20 digits"
                 onChange={handleInputChange}
               />
             </div>
