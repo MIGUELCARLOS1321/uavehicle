@@ -1,47 +1,52 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { getFirestore, doc, getDoc } from "firebase/firestore"; // Import Firestore functions
+import { getFirestore, doc, getDoc } from "firebase/firestore";
 import './LandingPage.css';
 
 function LandingPage() {
   const [userEmail, setUserEmail] = useState(null);
-  const [registeredFor, setRegisteredFor] = useState(null); // State to store the registeredFor value
+  const [registeredfor, setRegisteredfor] = useState(null);
   const navigate = useNavigate();
   const auth = getAuth();
-  const db = getFirestore(); // Initialize Firestore
+  const db = getFirestore();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUserEmail(user.email);
-        
+
         const fetchRegistrationStatus = async () => {
           try {
-            const userDoc = doc(db, "users", user.uid); 
+            const userDoc = doc(db, "users", user.uid); // Using "users" collection
             const userSnapshot = await getDoc(userDoc);
-            
+
             if (userSnapshot.exists()) {
               const userData = userSnapshot.data();
-              setRegisteredFor(userData.registeredFor || null); 
+              console.log("Fetched registeredfor:", userData.registeredfor); // Log the fetched value
+              setRegisteredfor(userData.registeredfor || null);
             } else {
-              setRegisteredFor(null); 
+              setRegisteredfor(null);
+              console.log("No registeredfor data found."); // Log if no data is found
             }
           } catch (error) {
-            console.error("Error fetching registeredFor:", error);
-            setRegisteredFor(null); 
+            console.error("Error fetching registeredfor:", error);
+            setRegisteredfor(null);
           }
         };
 
         fetchRegistrationStatus();
       } else {
-        
         navigate('/');
       }
     });
 
     return () => unsubscribe();
   }, [auth, navigate, db]);
+
+  useEffect(() => {
+    console.log("Current registeredfor state:", registeredfor); // Log whenever registeredfor updates
+  }, [registeredfor]);
 
   const handleLogout = async () => {
     try {
@@ -69,8 +74,7 @@ function LandingPage() {
           <div className='headerText'>Welcome to UAVEHICLE!</div>
         </div>
         <div className='midSection2'>
-          {registeredFor === null ? (
-            // If registeredFor is null, show the registration buttons
+          {registeredfor === null ? (
             <>
               <button className='for4wheels' onClick={() => navigate('/vehicleregistration')}>
                 <img src='/UAlogo.png' alt='UA Logo'></img>
@@ -91,7 +95,7 @@ function LandingPage() {
             </>
           ) : (
             <div className='registered'>
-              <span>You are already registered for: {registeredFor}</span>
+              <span>You are already registered for: {registeredfor}</span>
             </div>
           )}
         </div>

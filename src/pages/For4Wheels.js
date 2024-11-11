@@ -18,6 +18,7 @@ function For4Wheels() {
     const [privacyConsent, setPrivacyConsent] = useState(''); // Track consent
     const [currentStep, setCurrentStep] = useState(1); // Track the current step
     const [successMessage, setSuccessMessage] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [formData, setFormData] = useState({
         fullName: '',
         studentNumber: '',
@@ -123,18 +124,16 @@ function For4Wheels() {
       const handleSubmit = async (e) => {
         e.preventDefault();
     
-        try {
-            // Create a new document in the 'parkingfourwheel' collection
-            const parkingRef = doc(db, 'parkingfourwheel', userUid);
-            await setDoc(parkingRef, {
-                ...formData,
-            });
+        setIsSubmitting(true); 
     
-            // Update the 'registeredfor' field in the user collection
-            const userRef = doc(db, 'user', userUid);
+        try {
+            const parkingRef = doc(db, 'parkingfourwheel', userUid);
+            await setDoc(parkingRef, { ...formData });
+    
+            const userRef = doc(db, 'users', userUid);
             await setDoc(userRef, {
                 registeredfor: 'parkingfourwheel',
-            }, { merge: true }); // merge for overwriting
+            }, { merge: true }); 
     
             console.log('Data saved successfully');
             setSuccessMessage('Thank you for signing up! Please proceed to the Physical Plant and General Services Office for Confirmation and bring the physical copies.');
@@ -159,11 +158,16 @@ function For4Wheels() {
                 carImage: '',
                 role: '',
             });
+    
+            navigate("/landing"); 
         } catch (error) {
             console.error('Error saving data:', error);
             setSuccessMessage('An error occurred while saving your data.');
+        } finally {
+            setIsSubmitting(false);
         }
     };
+    
     
       
     return (
@@ -522,8 +526,8 @@ function For4Wheels() {
                             />
                             </div>
 
-                            <button type="submit" className="submit-button">
-                            Submit
+                            <button type="submit" className="submit-button" disabled={isSubmitting}>
+                            {isSubmitting ? "Submit" : "Submit"}
                             </button>
                         </form>
                         </div>

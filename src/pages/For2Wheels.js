@@ -15,8 +15,9 @@ function For2Wheels() {
 
     const [userUid, setUserUid] = useState(null);
     const [userEmail, setUserEmail] = useState(null);
-    const [privacyConsent, setPrivacyConsent] = useState(''); // Track consent
-    const [currentStep, setCurrentStep] = useState(1); // Track the current step
+    const [privacyConsent, setPrivacyConsent] = useState(''); 
+    const [currentStep, setCurrentStep] = useState(1); 
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [formData, setFormData] = useState({
         fullName: '',
@@ -89,11 +90,9 @@ function For2Wheels() {
             const { surname, firstName, middleInitial, suffix } = updatedData;
             const fullName = `${surname || ''}, ${firstName || ''} ${middleInitial ? middleInitial + ' ' : ''}${suffix || ''}`.trim();
     
-            // Concatenate Address
             const { addressline, city, province } = updatedData;
             const address = `${addressline ? addressline + ', ' : ''}${city ? city + ', ' : ''}${province || ''}`.trim();
     
-            // Update fullName and address fields in formData
             return {
                 ...updatedData,
                 fullName: fullName,
@@ -123,6 +122,7 @@ function For2Wheels() {
       const handleSubmit = async (e) => {
         e.preventDefault();
     
+        setIsSubmitting(true);
         try {
             // Create a new document in the 'parkingfourwheel' collection
             const parkingRef = doc(db, 'parkingtwovehicle', userUid);
@@ -131,7 +131,7 @@ function For2Wheels() {
             });
     
             // Update the 'registeredfor' field in the user collection
-            const userRef = doc(db, 'user', userUid);
+            const userRef = doc(db, 'users', userUid);
             await setDoc(userRef, {
                 registeredfor: 'parkingtwovehicle',
             }, { merge: true }); // merge for overwriting
@@ -162,6 +162,8 @@ function For2Wheels() {
         } catch (error) {
             console.error('Error saving data:', error);
             setSuccessMessage('An error occurred while saving your data.');
+        } finally{
+            setIsSubmitting(false);
         }
     };
     
@@ -516,8 +518,8 @@ function For2Wheels() {
                             />
                             </div>
 
-                            <button type="submit" className="submit-button">
-                            Submit
+                            <button type="submit" className="submit-button" disabled={isSubmitting}>
+                            {isSubmitting ? "Submit" : "Submit"}
                             </button>
                         </form>
                         </div>

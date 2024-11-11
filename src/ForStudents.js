@@ -74,7 +74,7 @@ function ForStudents() {
       });
   
       // Update the 'registeredfor' field in the user collection
-      const userRef = doc(db, 'user', userUid);
+      const userRef = doc(db, 'users', userUid);
       await setDoc(userRef, {
         registeredfor: 'parkingfourwheel',
       }, { merge: true }); // merge for overwriting

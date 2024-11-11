@@ -15,8 +15,9 @@ function ForPickNDrop() {
     const [successMessage, setSuccessMessage] = useState('');
     const [userUid, setUserUid] = useState(null);
     const [userEmail, setUserEmail] = useState(null);
-    const [privacyConsent, setPrivacyConsent] = useState(''); // Track consent
-    const [currentStep, setCurrentStep] = useState(1); // Track the current step
+    const [privacyConsent, setPrivacyConsent] = useState(''); 
+    const [currentStep, setCurrentStep] = useState(1); 
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [formData, setFormData] = useState({
         fullName: '',
         address: '',
@@ -57,14 +58,12 @@ function ForPickNDrop() {
         }
     };
 
-    // Go to next step
     const goToNextStep = () => {
         if (privacyConsent === 'yes' && currentStep < 5) {
             setCurrentStep(currentStep + 1);
         }
     };
 
-    // Go to previous step
     const goToPreviousStep = () => {
         if (currentStep > 1) {
             setCurrentStep(currentStep - 1);
@@ -76,14 +75,12 @@ function ForPickNDrop() {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
     
-        // Update the formData for the individual field
         setFormData(prevData => {
             const updatedData = {
                 ...prevData,
                 [name]: value,
             };
     
-            // Concatenate Full Name
             const { surname, firstName, middleInitial, suffix } = updatedData;
             const fullName = `${surname || ''}, ${firstName || ''} ${middleInitial ? middleInitial + ' ' : ''}${suffix || ''}`.trim();
     
@@ -91,7 +88,6 @@ function ForPickNDrop() {
             const { addressline, city, province } = updatedData;
             const address = `${addressline ? addressline + ', ' : ''}${city ? city + ', ' : ''}${province || ''}`.trim();
     
-            // Update fullName and address fields in formData
             return {
                 ...updatedData,
                 fullName: fullName,
@@ -121,6 +117,7 @@ function ForPickNDrop() {
       const handleSubmit = async (e) => {
         e.preventDefault();
     
+        setIsSubmitting(true);
         try {
             // Create a new document in the 'pick and drop' collection
             const pickdropRef = doc(db, 'pickndrop', userUid);
@@ -129,7 +126,7 @@ function ForPickNDrop() {
             });
     
             // Update the 'registeredfor' field in the user collection
-            const userRef = doc(db, 'user', userUid);
+            const userRef = doc(db, 'users', userUid);
             await setDoc(userRef, {
                 registeredfor: 'pickndrop',
             }, { merge: true }); // merge for overwriting
@@ -158,6 +155,8 @@ function ForPickNDrop() {
         } catch (error) {
             console.error('Error saving data:', error);
             setSuccessMessage('An error occurred while saving your data.');
+        } finally {
+            setIsSubmitting(false);
         }
     };
     
@@ -494,8 +493,8 @@ function ForPickNDrop() {
                             />
                             </div>
 
-                            <button type="submit" className="submit-button">
-                            Submit
+                            <button type="submit" className="submit-button" disabled={isSubmitting}>
+                            {isSubmitting ? "Submit" : "Submit"}
                             </button>
                         </form>
                         </div>

@@ -186,5 +186,16 @@
   color: rgba(0, 0, 0, 0.7);;
 }
 
+.registered{
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 2rem;
+  font-weight: bold;
+}
+
 
 

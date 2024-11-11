@@ -17,6 +17,7 @@ function ForService() {
     const [userEmail, setUserEmail] = useState(null);
     const [privacyConsent, setPrivacyConsent] = useState(''); 
     const [currentStep, setCurrentStep] = useState(1); 
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [formData, setFormData] = useState({
         fullName: '',
         address: '',
@@ -118,13 +119,14 @@ function ForService() {
       const handleSubmit = async (e) => {
         e.preventDefault();
     
+        setIsSubmitting(true);
         try {
             const parkingRef = doc(db, 'parkingservice', userUid);
             await setDoc(parkingRef, {
                 ...formData,
             });
     
-            const userRef = doc(db, 'user', userUid);
+            const userRef = doc(db, 'users', userUid);
             await setDoc(userRef, {
                 registeredfor: 'parkingservice',
             }, { merge: true }); 
@@ -153,6 +155,8 @@ function ForService() {
         } catch (error) {
             console.error('Error saving data:', error);
             setSuccessMessage('An error occurred while saving your data.');
+        } finally {
+            setIsSubmitting(false);
         }
     };
     
@@ -489,8 +493,8 @@ function ForService() {
                             />
                             </div>
 
-                            <button type="submit" className="submit-button">
-                            Submit
+                            <button type="submit" className="submit-button" disabled={isSubmitting}>
+                            {isSubmitting ? "Submit" : "Submit"}
                             </button>
                         </form>
                         </div>
