@@ -286,5 +286,18 @@
     
 }
 
-  
-  
+.contactHolder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.digit{
+    padding: 0.5rem;
+    margin-right: .5rem;
+    border-radius: 4px;
+    border: 1px solid #cccccc;
+    font-size: 1rem;
+    color: #333;
+    background-color: #fff;
+}

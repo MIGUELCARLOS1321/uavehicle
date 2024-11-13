@@ -123,6 +123,17 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
+
+
+.forgotPass{
+    margin-top: 1; 
+    width: 100%;    
+    max-width: 400px; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    font-size: 1rem;
+}
   
 .log-in-button{
     background-color: #01468f; 

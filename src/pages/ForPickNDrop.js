@@ -30,12 +30,11 @@ function ForPickNDrop() {
         registeredOwner: '',
         plateNumber: '',
         registrationNumber: '',
-        receiptNumber: '',
         driverLicenseImage: '',
         ltoRegistrationImage: '',
         ltoReceiptImage: '',
         carImage: '',
-        remarks: '',
+        ltoReceiptNumber:'',
     });
 
     useEffect(() => {
@@ -49,15 +48,6 @@ function ForPickNDrop() {
         });
         return () => unsubscribe();
     }, [auth, navigate]);
-
-    const handleLogout = async () => {
-        try {
-            await signOut(auth);
-            navigate('/');
-        } catch (error) {
-            console.error("Failed to log out:", error);
-        }
-    };
 
     const goToNextStep = () => {
         if (privacyConsent === 'yes' && currentStep < 5) {
@@ -147,12 +137,11 @@ function ForPickNDrop() {
                 registeredOwner: '',
                 plateNumber: '',
                 registrationNumber: '',
-                receiptNumber: '',
                 driverLicenseImage: '',
                 ltoRegistrationImage: '',
                 ltoReceiptImage: '',
                 carImage: '',
-                remarks:'',
+                ltoReceiptNumber:'',
             });
 
             navigate("/landing"); 
@@ -167,7 +156,6 @@ function ForPickNDrop() {
       
     return (
         <div className='pageContainer'>
-            <button onClick={handleLogout} className="logoutButton">Logout</button>
             <div className='leftContent'>
                 <div className='topContainer'>
                     <div className='logoHolder'>
@@ -348,13 +336,18 @@ function ForPickNDrop() {
                             </div>
                             <div className="form-group">
                                 <label>Contact Number (63+)</label>
-                                <input
-                                    type="text"
-                                    name="contactNumber"
-                                    maxLength="10"
-                                    required
-                                    onChange={handleInputChange}
-                                />
+                                <div className='contactHolder'>
+                                    <div className='digit'>
+                                        63+
+                                    </div>
+                                    <input
+                                        type="text"
+                                        name="contactNumber"
+                                        maxLength="10"
+                                        required
+                                        onChange={handleInputChange}
+                                    />
+                                </div>
                             </div>
                             <div className="form-group">
                             <label>Driver's License Number</label>
@@ -410,7 +403,6 @@ function ForPickNDrop() {
                                 <option value="Hatchback">Hatchback</option>
                                 <option value="Crossover">Crossover</option>
                                 <option value="Van">Van</option>
-                                <option value="Other">Other</option>
                             </select>
                             </div>
                             <div className="form-group">
@@ -470,10 +462,10 @@ function ForPickNDrop() {
                             />
                             </div>
                             <div className="form-group">
-                            <label>Receipt Number</label>
+                            <label>LTO Receipt Number</label>
                             <input
                                 type="text"
-                                name="receiptNumber"
+                                name="ltoReceiptNumber"
                                 required
                                 maxLength="20"
                                 pattern="\d{10,20}" // Accepts 10 to 20 digits only
@@ -520,16 +512,6 @@ function ForPickNDrop() {
                                 required
                                 onChange={handleFileChange}
                             />
-                            </div>
-
-                            <div className='form-group'>
-                                <label>Remarks if any</label>
-                                <textarea
-                                    type='text'
-                                    name='remarks'
-                                    maxLength="500"
-                                    onChange={handleInputChange}
-                                />
                             </div>
 
                             <button type="submit" className="submit-button" disabled={isSubmitting}>

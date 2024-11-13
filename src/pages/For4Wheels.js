@@ -32,13 +32,14 @@ function For4Wheels() {
         registeredOwner: '',
         plateNumber: '',
         registrationNumber: '',
-        receiptNumber: '',
+        ltoReceiptNumber: '',
         driverLicenseImage: '',
         ltoRegistrationImage: '',
         ltoReceiptImage: '',
         carImage: '',
         role: '', 
-        remarks: '',
+        receiptNumber: '',
+        receiptImage: '',
     });
 
     useEffect(() => {
@@ -52,15 +53,6 @@ function For4Wheels() {
         });
         return () => unsubscribe();
     }, [auth, navigate]);
-
-    const handleLogout = async () => {
-        try {
-            await signOut(auth);
-            navigate('/');
-        } catch (error) {
-            console.error("Failed to log out:", error);
-        }
-    };
 
     // Go to next step
     const goToNextStep = () => {
@@ -152,13 +144,14 @@ function For4Wheels() {
                 registeredOwner: '',
                 plateNumber: '',
                 registrationNumber: '',
-                receiptNumber: '',
+                receiptNumber:'',
+                ltoReceiptNumber: '',
                 driverLicenseImage: '',
                 ltoRegistrationImage: '',
-                ltoReceiptImage: '',
                 carImage: '',
                 role: '',
-                remarks: ''
+                ltoReceiptImage: '',
+                receiptImage: '',
             });
     
             navigate("/landing"); 
@@ -174,7 +167,6 @@ function For4Wheels() {
       
     return (
         <div className='pageContainer'>
-            <button onClick={handleLogout} className="logoutButton">Logout</button>
             <div className='leftContent'>
                 <div className='topContainer'>
                     <div className='logoHolder'>
@@ -377,13 +369,18 @@ function For4Wheels() {
                             </div>
                             <div className="form-group">
                                 <label>Contact Number (63+)</label>
-                                <input
-                                    type="text"
-                                    name="contactNumber"
-                                    maxLength="10"
-                                    required
-                                    onChange={handleInputChange}
-                                />
+                                <div className='contactHolder'>
+                                    <div className='digit'>
+                                        63+
+                                    </div>
+                                    <input
+                                        type="text"
+                                        name="contactNumber"
+                                        maxLength="10"
+                                        required
+                                        onChange={handleInputChange}
+                                    />
+                                </div>
                             </div>
                             <div className="form-group">
                             <label>Driver's License Number</label>
@@ -439,7 +436,6 @@ function For4Wheels() {
                                 <option value="Hatchback">Hatchback</option>
                                 <option value="Crossover">Crossover</option>
                                 <option value="Van">Van</option>
-                                <option value="Other">Other</option>
                             </select>
                             </div>
                             <div className="form-group">
@@ -498,27 +494,53 @@ function For4Wheels() {
                                 onChange={handleInputChange}
                             />
                             </div>
+
                             <div className="form-group">
-                            <label>Receipt Number</label>
-                            <input
-                                type="text"
-                                name="receiptNumber"
-                                required
-                                maxLength="20"
-                                pattern="\d{10,20}" // Accepts 10 to 20 digits only
-                                title="Must be 10-20 digits"
-                                onChange={handleInputChange}
-                            />
+                                <label>LTO Receipt Number</label>
+                                <input
+                                    type="text"
+                                    name="ltoReceiptNumber"
+                                    required
+                                    maxLength="20"
+                                    pattern="\d{10,20}" // Accepts 10 to 20 digits only
+                                    title="Must be 10-20 digits"
+                                    onChange={handleInputChange}
+                                />
                             </div>
+
                             <div className="form-group">
-                            <label>Upload Driver's License Image</label>
-                            <input
-                                type="file"
-                                name="driverLicenseImage"
-                                accept="image/*"
-                                required
-                                onChange={handleFileChange}
-                            />
+                                <label>Official Payment Receipt Number</label>
+                                <input
+                                    type="text"
+                                    name="receiptNumber"
+                                    required
+                                    maxLength="20"
+                                    pattern="\d{10,20}" // Accepts 10 to 20 digits only
+                                    title="Must be 10-20 digits"
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label>Upload Payment Receipt Image</label>
+                                <input
+                                    type="file"
+                                    name="receiptImage"
+                                    accept="image/*"
+                                    required
+                                    onChange={handleFileChange}
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label>Upload Driver's License Image</label>
+                                <input
+                                    type="file"
+                                    name="driverLicenseImage"
+                                    accept="image/*"
+                                    required
+                                    onChange={handleFileChange}
+                                />
                             </div>
                             <div className="form-group">
                             <label>Upload LTO Registration Image</label>
@@ -549,16 +571,6 @@ function For4Wheels() {
                                 required
                                 onChange={handleFileChange}
                             />
-                            </div>
-
-                            <div className='form-group'>
-                                <label>Remarks if any</label>
-                                <textarea
-                                    type='text'
-                                    name='remarks'
-                                    maxLength="500"
-                                    onChange={handleInputChange}
-                                />
                             </div>
 
                             <button type="submit" className="submit-button" disabled={isSubmitting}>

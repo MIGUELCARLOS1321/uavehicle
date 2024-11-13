@@ -105,6 +105,10 @@ function LoginPage() {
                 />
               </div>
 
+              <div className='forgotPass'>
+                <Link to="#">Forgot Password?</Link>
+              </div>
+
               <div className="button-container">
                 <button className="log-in-button" onClick={handleLogin}>
                   Login
