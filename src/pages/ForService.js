@@ -142,7 +142,6 @@ function ForService() {
                 ltoReceiptNumber: '',
                 driverLicenseImage: '',
                 ltoRegistrationImage: '',
-                ltoReceiptImage: '',
                 carImage: '',
                 ltoReceiptImage: '',
                 receiptNumber: '',
@@ -480,7 +479,7 @@ function ForService() {
                             </div>
 
                             <div className="form-group">
-                                <label>Official Payment Receipt Number</label>
+                                <label>Official Payment Receipt Number (Maximum 2MB)</label>
                                 <input
                                     type="text"
                                     name="receiptNumber"

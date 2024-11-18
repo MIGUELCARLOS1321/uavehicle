@@ -32,6 +32,8 @@ function ForPickNDrop() {
         registrationNumber: '',
         driverLicenseImage: '',
         ltoRegistrationImage: '',
+        receiptNumber: '',
+        receiptImage: '',
         ltoReceiptImage: '',
         carImage: '',
         ltoReceiptNumber:'',
@@ -139,6 +141,8 @@ function ForPickNDrop() {
                 registrationNumber: '',
                 driverLicenseImage: '',
                 ltoRegistrationImage: '',
+                receiptNumber: '',
+                receiptImage:'',
                 ltoReceiptImage: '',
                 carImage: '',
                 ltoReceiptNumber:'',
@@ -474,7 +478,31 @@ function ForPickNDrop() {
                             />
                             </div>
                             <div className="form-group">
-                            <label>Upload Driver's License Image</label>
+                                <label>Official Payment Receipt Number</label>
+                                <input
+                                    type="text"
+                                    name="receiptNumber"
+                                    required
+                                    maxLength="20"
+                                    pattern="\d{10,20}" // Accepts 10 to 20 digits only
+                                    title="Must be 10-20 digits"
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label>Upload Payment Receipt Image (Maximum 2MB)</label>
+                                <input
+                                    type="file"
+                                    name="receiptImage"
+                                    accept="image/*"
+                                    required
+                                    onChange={handleFileChange}
+                                />
+                            </div>
+
+                            <div className="form-group">
+                            <label>Upload Driver's License Image (Maximum 2MB)</label>
                             <input
                                 type="file"
                                 name="driverLicenseImage"
@@ -484,7 +512,7 @@ function ForPickNDrop() {
                             />
                             </div>
                             <div className="form-group">
-                            <label>Upload LTO Registration Image</label>
+                            <label>Upload LTO Registration Image (Maximum 2MB)</label>
                             <input
                                 type="file"
                                 name="ltoRegistrationImage"
@@ -494,7 +522,7 @@ function ForPickNDrop() {
                             />
                             </div>
                             <div className="form-group">
-                            <label>Upload LTO Receipt Image</label>
+                            <label>Upload LTO Receipt Image (Maximum 2MB)</label>
                             <input
                                 type="file"
                                 name="ltoReceiptImage"
@@ -504,7 +532,7 @@ function ForPickNDrop() {
                             />
                             </div>
                             <div className="form-group">
-                            <label>Upload Vehicle Image</label>
+                            <label>Upload Vehicle Image (Maximum 2MB)</label>
                             <input
                                 type="file"
                                 name="carImage"

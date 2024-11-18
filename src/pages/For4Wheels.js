@@ -522,7 +522,7 @@ function For4Wheels() {
                             </div>
 
                             <div className="form-group">
-                                <label>Upload Payment Receipt Image</label>
+                                <label>Upload Payment Receipt Image (Maximum 2MB)</label>
                                 <input
                                     type="file"
                                     name="receiptImage"
@@ -533,7 +533,7 @@ function For4Wheels() {
                             </div>
 
                             <div className="form-group">
-                                <label>Upload Driver's License Image</label>
+                                <label>Upload Driver's License Image (Maximum 2MB)</label>
                                 <input
                                     type="file"
                                     name="driverLicenseImage"
@@ -553,7 +553,7 @@ function For4Wheels() {
                             />
                             </div>
                             <div className="form-group">
-                            <label>Upload LTO Receipt Image</label>
+                            <label>Upload LTO Receipt Image (Maximum 2MB)</label>
                             <input
                                 type="file"
                                 name="ltoReceiptImage"
@@ -563,7 +563,7 @@ function For4Wheels() {
                             />
                             </div>
                             <div className="form-group">
-                            <label>Upload Vehicle Image</label>
+                            <label>Upload Vehicle Image (Maximum 2MB)</label>
                             <input
                                 type="file"
                                 name="carImage"
